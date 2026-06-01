@@ -9,7 +9,7 @@
 ![Deployed](https://img.shields.io/badge/DEPLOYED-VERCEL-bd00ff?style=for-the-badge&labelColor=020617)
 ![License](https://img.shields.io/badge/LICENSE-MIT-ff8a00?style=for-the-badge&labelColor=020617)
 
-**[🌐 Live Demo]([(https://personal-portfolio-iota-gray.vercel.app/)])** · **[💼 LinkedIn](https://www.linkedin.com/in/ashutosh-kamboya-0297bb374/)** · **[📧 Email](mailto:ashutoshkamboya@gmail.com)**
+**[🌐 Live Demo](https://personal-portfolio-iota-gray.vercel.app/)** · **[💼 LinkedIn](https://www.linkedin.com/in/ashutosh-kamboya-0297bb374/)** · **[📧 Email](mailto:ashutoshkamboya@gmail.com)**
 
 </div>
 

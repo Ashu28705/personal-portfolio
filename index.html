@@ -1791,15 +1791,15 @@
       inset: 0;
       transform-style: preserve-3d;
     }
-    .project-shot-bg {
+    .project-shot-stage::before {
+      content: "";
       position: absolute;
       inset: -18%;
       opacity: 0.18;
       filter: blur(28px) saturate(1.15);
       transform: translateZ(-90px) scale(1.16);
-      object-fit: cover;
-      width: 136%;
-      height: 136%;
+      background: center / cover no-repeat var(--project-image, none);
+      transition: opacity 260ms ease;
     }
     .project-shot-panel {
       --shot-y: 0px;
@@ -1823,11 +1823,46 @@
     }
     .project-shot-panel img {
       width: 100%;
-      min-height: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: top center;
       transform: translateY(var(--shot-y));
       transition: transform 650ms var(--ease);
+    }
+    .project-shot-panel:hover img {
+      transform: translateY(var(--shot-y)) scale(1.035);
+    }
+    .project-shot-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 28px;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(98,230,255,0.16), transparent 36%),
+        linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.025));
+      backdrop-filter: blur(18px);
+      color: var(--text);
+      font: 700 11px/1.7 var(--mono);
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .project-shot-stage.has-image-error::before { opacity: 0.08; }
+    .project-shot-stage.has-image-error .project-shot-panel img { display: none; }
+    .project-shot-stage.has-image-error .project-shot-placeholder { display: grid; }
+    .project-shot-placeholder span {
+      display: grid;
+      gap: 8px;
+      padding: 16px 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      background: rgba(7,8,13,0.42);
+      box-shadow: 0 18px 56px rgba(0,0,0,0.22), inset 0 0 24px rgba(255,255,255,0.035);
+    }
+    .project-shot-placeholder small {
+      color: var(--cyan);
+      font-size: 9px;
     }
     .project-shot-panel .external-mark {
       position: absolute;
@@ -2827,10 +2862,10 @@
           <article class="project-story" data-project-filter="flask python javascript mysql openweathermap api google places api">
             <div class="project-visual depth-card light-follow" data-cursor="VIEW">
               <div class="visual-frame">
-                <div class="project-shot-stage">
-                  <img class="project-shot-bg" src="assets/project-screens/travel-ai.png" alt="" aria-hidden="true" loading="lazy" />
+                <div class="project-shot-stage" data-project-image="travel-ai">
                   <a class="project-shot-panel" href="https://github.com/Ashu28705/traval-platform-insights" target="_blank" rel="noopener" data-cursor="EXPLORE">
-                    <img src="assets/project-screens/travel-ai.png" alt="TravelAI project interface screenshot" loading="lazy" />
+                    <img alt="" loading="lazy" decoding="async" />
+                    <span class="project-shot-placeholder"><span>Screenshot Coming Soon<small>Project preview unavailable</small></span></span>
                     <span class="external-mark">OPEN</span>
                   </a>
                   <div class="project-float-tags"><span>Flask</span><span>Places API</span><span>Weather</span></div>
@@ -2854,10 +2889,10 @@
           <article class="project-story" data-project-filter="flask html css javascript json">
             <div class="project-visual depth-card light-follow" data-cursor="VIEW">
               <div class="visual-frame">
-                <div class="project-shot-stage">
-                  <img class="project-shot-bg" src="assets/project-screens/unibook.png" alt="" aria-hidden="true" loading="lazy" />
+                <div class="project-shot-stage" data-project-image="unibook">
                   <a class="project-shot-panel" href="https://uni-book-beige.vercel.app/dashboard" target="_blank" rel="noopener" data-cursor="EXPLORE">
-                    <img src="assets/project-screens/unibook.png" alt="UniBook project dashboard screenshot" loading="lazy" />
+                    <img alt="" loading="lazy" decoding="async" />
+                    <span class="project-shot-placeholder"><span>Screenshot Coming Soon<small>Project preview unavailable</small></span></span>
                     <span class="external-mark">OPEN</span>
                   </a>
                   <div class="project-float-tags"><span>Booking</span><span>Calendar</span><span>Flask</span></div>
@@ -2881,10 +2916,10 @@
           <article class="project-story" data-project-filter="node express mongodb html css javascript">
             <div class="project-visual depth-card light-follow" data-cursor="VIEW">
               <div class="visual-frame">
-                <div class="project-shot-stage">
-                  <img class="project-shot-bg" src="assets/project-screens/digital-farming-advisory.png" alt="" aria-hidden="true" loading="lazy" />
+                <div class="project-shot-stage" data-project-image="digital-farming-advisory">
                   <a class="project-shot-panel" href="https://github.com/Ashu28705" target="_blank" rel="noopener" data-cursor="EXPLORE">
-                    <img src="assets/project-screens/digital-farming-advisory.png" alt="Digital Farming Advisory System interface screenshot" loading="lazy" />
+                    <img alt="" loading="lazy" decoding="async" />
+                    <span class="project-shot-placeholder"><span>Screenshot Coming Soon<small>Project preview unavailable</small></span></span>
                     <span class="external-mark">OPEN</span>
                   </a>
                   <div class="project-float-tags"><span>MongoDB</span><span>Marketplace</span><span>Farmers</span></div>
@@ -2907,19 +2942,12 @@
           <article class="project-story" data-project-filter="python jupyter notebook scikit-learn classification regression machine learning">
             <div class="project-visual depth-card light-follow" data-cursor="VIEW">
               <div class="visual-frame">
-                <div class="ml-project-visual" data-expected-asset="assets/project-screens/codealpha-ml-projects.png" aria-label="CodeAlpha machine learning workflow visual">
-                  <span class="ml-line" style="--w: 32%; --r: -148deg"></span>
-                  <span class="ml-line" style="--w: 36%; --r: -36deg"></span>
-                  <span class="ml-line" style="--w: 31%; --r: 46deg"></span>
-                  <span class="ml-line" style="--w: 34%; --r: 154deg"></span>
-                  <span class="ml-core">Model</span>
-                  <span class="ml-node" style="--x: 19%; --y: 30%; --z: 72px">Data</span>
-                  <span class="ml-node" style="--x: 79%; --y: 26%; --z: 118px">Features</span>
-                  <span class="ml-node" style="--x: 76%; --y: 66%; --z: 92px">Evaluate</span>
-                  <span class="ml-node" style="--x: 22%; --y: 68%; --z: 110px">Predict</span>
-                  <div class="ml-chart" aria-hidden="true">
-                    <i style="--h: 44%"></i><i style="--h: 72%"></i><i style="--h: 54%"></i><i style="--h: 88%"></i><i style="--h: 62%"></i><i style="--h: 76%"></i><i style="--h: 38%"></i>
-                  </div>
+                <div class="project-shot-stage" data-project-image="codealpha-ml-projects">
+                  <a class="project-shot-panel" href="https://github.com/Ashu28705/CodeAlpha_Credit_Scoring_Model" target="_blank" rel="noopener" data-cursor="EXPLORE">
+                    <img alt="" loading="lazy" decoding="async" />
+                    <span class="project-shot-placeholder"><span>Screenshot Coming Soon<small>CodeAlpha preview is not in this repository</small></span></span>
+                    <span class="external-mark">OPEN</span>
+                  </a>
                 </div>
                 <div class="project-float-tags"><span>Python</span><span>Scikit-Learn</span><span>Jupyter</span></div>
               </div>
@@ -3011,6 +3039,7 @@
     </div>
   </footer>
 
+  <script src="/projectImages.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -3048,6 +3077,27 @@
       { name: "Databases", color: "#8b5cf6", skills: ["MySQL", "PostgreSQL", "MongoDB"] },
       { name: "Developer Tools", color: "#f5f5f5", skills: ["Git", "GitHub", "Jupyter Notebook", "XAMPP", "VS Code"] }
     ];
+
+    function setupProjectImages() {
+      const registry = window.projectImages || {};
+      $$('[data-project-image]').forEach(stage => {
+        const key = stage.dataset.projectImage;
+        const asset = registry[key];
+        const image = $('img', stage);
+        if (!asset || !image) {
+          console.warn(`[project-images] Missing registry entry for "${key}".`);
+          stage.classList.add('has-image-error');
+          return;
+        }
+        stage.style.setProperty('--project-image', `url("${asset.src}")`);
+        image.alt = asset.alt;
+        image.addEventListener('error', () => {
+          console.warn(`[project-images] Screenshot failed to load: ${asset.src}`);
+          stage.classList.add('has-image-error');
+        }, { once: true });
+        image.src = asset.src;
+      });
+    }
 
     function updateLoader() {
       const loader = $("#loader");
@@ -3723,6 +3773,7 @@
       setupCursor();
       setupNavigation();
       setupSmoothScroll();
+      setupProjectImages();
       setupDepthCards();
       setupMagneticButtons();
       setupHeroScene();
